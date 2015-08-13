@@ -7,7 +7,7 @@ full_name = first_name << last_name
 
 (1...50).each { |e| puts e }
 
-while condition
+while 
 	
 end
 

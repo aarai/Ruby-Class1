@@ -28,6 +28,7 @@ puts 'guess a number between 1 and 10'
 while user_wins != true
 	guess_number = gets.chomp.to_i
 
+binding.pry
 	if guess_number == winning_number
 		user_wins = true
 		puts "you're right, have a bite of a cookie"
