@@ -1,0 +1,294 @@
+<!DOCTYPE html><html>
+
+<head>
+<meta charset="utf-8">
+<title>ruby-basics-three</title>
+<style type="text/css">
+*{margin:0;padding:0;}
+body {
+	font:13.34px helvetica,arial,freesans,clean,sans-serif;
+	color:black;
+	line-height:1.4em;
+	background-color: #F8F8F8;
+	padding: 0.7em;
+}
+p {
+	margin:1em 0;
+	line-height:1.5em;
+}
+table {
+	font-size:inherit;
+	font:100%;
+	margin:1em;
+}
+table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
+select,option{padding:0 .25em;}
+optgroup{margin-top:.5em;}
+pre,code{font:12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
+pre {
+	margin:1em 0;
+	font-size:12px;
+	background-color:#eee;
+	border:1px solid #ddd;
+	padding:5px;
+	line-height:1.5em;
+	color:#444;
+	overflow:auto;
+	-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;border-radius:3px;
+}
+pre code {
+	padding:0;
+	font-size:12px;
+	background-color:#eee;
+	border:none;
+}
+code {
+	font-size:12px;
+	background-color:#f8f8ff;
+	color:#444;
+	padding:0 .2em;
+	border:1px solid #dedede;
+}
+img{border:0;max-width:100%;}
+abbr{border-bottom:none;}
+a{color:#4183c4;text-decoration:none;}
+a:hover{text-decoration:underline;}
+a code,a:link code,a:visited code{color:#4183c4;}
+h2,h3{margin:1em 0;}
+h1,h2,h3,h4,h5,h6{border:0;}
+h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em;}
+h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
+h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em;}
+h3{margin-top:1em;}
+hr{border:1px solid #ddd;}
+ul{margin:1em 0 1em 2em;}
+ol{margin:1em 0 1em 2em;}
+ul li,ol li{margin-top:.5em;margin-bottom:.5em;}
+ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}
+blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}
+dt{font-weight:bold;margin-left:1em;}
+dd{margin-left:2em;margin-bottom:1em;}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+</head>
+<body>
+<h1 id="toc_0">Ruby Three</h1>
+
+<h1 id="toc_1">Methods Continued</h1>
+
+<pre><code>def welcome
+    puts &quot;Hello World!&quot;
+end
+
+def add
+    puts 1 + 1
+end
+
+# Underscore between words, like variable names
+def longest_word
+  words = [&#39;apple&#39;, &#39;pear&#39;, &#39;banana&#39;, &#39;plum&#39;]
+  longest_word = words.inject do |memo,word|
+    memo.length &gt; word.length ? memo : word
+  end
+  puts longest_word
+end
+
+# Method names can have question marks in them
+# Useful for tests and booleans
+def over_five?
+    value = 3
+    puts value &gt; 5 ? &#39;Over 5&#39; : &#39;Not over 5&#39;
+end
+</code></pre>
+
+<hr>
+
+<h1 id="toc_2">Object Inheritance</h1>
+
+<ul>
+<li><p>In Ruby, one object can <em>inherit</em> from another object, taking all of its methods and attributes with it</p></li>
+<li><p>Inheritance is indicated at object definition, using the &lt; operator</p></li>
+</ul>
+
+<pre><code class="language-ruby">class Dog &lt; Animal</code></pre>
+
+<ul>
+<li>We would say the above out loud like this: &quot;class Dog extends Animal&quot;</li>
+</ul>
+
+<hr>
+
+<h1 id="toc_3">Object Inheritance Example</h1>
+
+<pre><code class="language-ruby">class Animal
+  attr_accessor :legs
+end
+
+class Dog &lt; Animal
+  def woof
+    puts &quot;WOOF&quot;
+  end
+end
+
+my_dog = Dog.new
+my_dog.legs = 4
+my_dog.woof
+&gt;&quot;WOOF&quot;</code></pre>
+
+<hr>
+
+<h1 id="toc_4">Exercise - Object Inheritance</h1>
+
+<ul>
+<li><p>Create two objects. Have the second object inherit from the first</p></li>
+<li><p>Instantiate instances of each object and prove that the first object&#39;s methods can be accessed from an instance of the second object</p></li>
+<li><p>Use comments in your script to explain what you are doing</p></li>
+</ul>
+
+<hr>
+
+<h1 id="toc_5"><code>super</code></h1>
+
+<ul>
+<li><p>In a child object, we can call all of the existing code from a parent method using the <code>super</code> keyword</p></li>
+<li><p>See the next slide for an example</p></li>
+</ul>
+
+<hr>
+
+<h1 id="toc_6"><code>super</code></h1>
+
+<pre><code class="language-ruby">class User
+  def create
+    add_record(@name, @email)
+    activate_account
+  end
+end
+
+class Admin &lt; User
+  def create
+    super
+    add_permissions(&quot;Admin&quot;)
+  end
+end</code></pre>
+
+<hr>
+
+<h1 id="toc_7">Exercise</h1>
+
+<ul>
+<li><p>Create an &quot;object zoo&quot;. You should create a class that models a Zoo which has at least one attribute called exhibits. Inside of this attribute is an array of object instances extended from an Animal object that have their own unique traits depending on which animal they are.</p></li>
+<li><p>Create unique methods on all of your objects depending on what kind of animal they are supposed to emulate. You could use super and even have a method on Animal that is customized per specific animal objects.</p></li>
+</ul>
+
+<hr>
+
+<h1 id="toc_8">The bang (!)</h1>
+
+<p>A bang reverses the boolean value</p>
+
+<pre><code class="language-ruby">class Item
+  attr_reader :visible
+
+#  ... initialization etc. here
+
+  def visibility_toggle
+    @visible = !@visible # Use Bang (!) to toggle
+  end
+end</code></pre>
+
+<p>^ The bang operator can also be invoked on functions to call an in-place replacement (destructive) to re-assign values to the calling object:</p>
+
+<p>^string = &quot;Some text&quot;
+string.upcase!
+SOME TEXT</p>
+
+<hr>
+
+<h1 id="toc_9">.nil?</h1>
+
+<p>Checks to see if the referenced item is equal to nil, or nothing</p>
+
+<pre><code class="language-ruby">something = &quot;indeed&quot;
+nothing = nil
+
+something.nil?
+false
+
+nothing.nil?
+true</code></pre>
+
+<p>^ .nil? is referring to the function .nil? that checks for a nil value</p>
+
+<hr>
+
+<h1 id="toc_10">unless</h1>
+
+<p>The opposite of if. Can be used as a one-liner, just like if can:</p>
+
+<pre><code class="language-ruby">widget_counter = 3 unless a.nil?
+
+widget_counter = 5 if widgets.length == 5</code></pre>
+
+<p>^ This is an example of postfix inline conditionals in Ruby!</p>
+
+<hr>
+
+<h1 id="toc_11">Recursive Methods</h1>
+
+<p>A recursive method is a method that calls itself.</p>
+
+<pre><code class="language-ruby">def can_i_have_your_number
+  puts &quot;Can I have your number?&quot;
+  number = gets
+  can_i_have_your_number unless number.length &gt; 1
+end
+can_i_have_your_number</code></pre>
+
+<p>^ This recursive function will keep asking for the user&#39;s number until it gets some sort of response longer than one character.</p>
+
+<hr>
+
+<h1 id="toc_12">Exercise</h1>
+
+<p>Write a recursive method to subtract 1 from a variable equal to 100 until the variable is equal to 0.</p>
+
+<p>^ Can demonstrate the value of setting default argument values with this example.</p>
+
+<hr>
+
+<h1 id="toc_13">Exercise</h1>
+
+<p>Create a &quot;choose your own adventure&quot; style game using Ruby. Store characters as classes with unique attributes and methods. Use methods and recursive methods to simplify the logical flow of the game and the <code>gets</code> method to get user input.</p>
+
+<p>Use this exercise to be sure you&#39;re familiar with advanced Ruby topics.</p>
+
+
+</body>
+
+</html>

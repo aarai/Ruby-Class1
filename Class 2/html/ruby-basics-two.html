@@ -1,0 +1,617 @@
+<!DOCTYPE html><html>
+
+<head>
+<meta charset="utf-8">
+<title>ruby-basics-two</title>
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+</head>
+<body>
+<h1 id="toc_0">Ruby Basics Two</h1>
+
+<hr>
+
+<h1 id="toc_1">Gathering data from a user</h1>
+
+<p>If you&#39;re running your Ruby program from the command line, you can use gets to have the user type in some input:</p>
+
+<pre><code class="language-ruby">puts &quot;What is your name?&quot;
+
+name = gets
+
+puts &quot;Your name is&quot;
+
+puts name</code></pre>
+
+<hr>
+
+<h1 id="toc_2">Symbols vs. Strings</h1>
+
+<p>Why are symbols and strings different? A symbol is immutable. Take the following code sample:</p>
+
+<pre><code class="language-ruby">&quot;hello&quot; &lt;&lt; &quot;world&quot;
+
+&gt; &quot;helloworld&quot;
+
+:hello &lt;&lt; :world
+
+&gt;NoMethodError: undefined method &#39;&lt;&lt;&#39; for :hello:Symbol</code></pre>
+
+<p>It&#39;s impossible to concatenate one symbol to another. This means that symbols are inherently more efficient as the Ruby interpreter always knows what their value is</p>
+
+<hr>
+
+<h1 id="toc_3">Symbols vs. Strings</h1>
+
+<ul>
+<li><p>Two symbols with the same value can be stored at the same location in memory, saving resources</p></li>
+<li><p>Since their value cannot be changed - an identical symbol simply becomes a reference to the already stored value of the first symbol</p></li>
+<li><p>It also makes comparing two symbols far more efficient - the Ruby interpreter can compare the symbols&#39; object id to see if it matches rather than comparing the actual value of the symbol, as would be necessary to compare two mutable strings</p></li>
+</ul>
+
+<hr>
+
+<h1 id="toc_4">Comments</h1>
+
+<p>Comments, a way to write in your notes or disable code, are demarcated in Ruby using the #</p>
+
+<pre><code class="language-ruby"># This won&#39;t be run
+
+puts &quot;But this line will be run&quot;
+
+# puts &quot;And this one will not be&quot;</code></pre>
+
+<hr>
+
+<h1 id="toc_5">Exercise: Basic Data Types</h1>
+
+<p>Try to use the basic data types inside of a Ruby file. Your file should include comments that describe what each data type is and what it is used for, for example:</p>
+
+<pre><code class="language-ruby"># A string is used to store a collection
+# of characters. It is demarcated using 
+# quotes.
+
+&quot;Hello World&quot;</code></pre>
+
+<hr>
+
+<h1 id="toc_6">Conditions</h1>
+
+<p>A condition in Ruby is a test for something that evaluates to the boolean <code>true</code> or <code>false</code></p>
+
+<pre><code class="language-ruby">2 == 2
+
+&gt; true
+
+&quot;Hello&quot; == &quot;Hey&quot;
+
+&gt; false</code></pre>
+
+<hr>
+
+<h1 id="toc_7">Exercise</h1>
+
+<p>Try Running a few conditions inside of IRB to see what they evaluate to.</p>
+
+<p>For example:</p>
+
+<pre><code class="language-ruby">$ irb
+001&gt; 2 == 2
+&gt; true</code></pre>
+
+<hr>
+
+<h1 id="toc_8">Logic</h1>
+
+<ul>
+<li><p>A logical statement evaluates a number of conditions and executes code based on their truthiness</p></li>
+<li><p>Think of it as two paths diverging in a wood, if one condition is true, follow the left path, if false, follow the right path</p></li>
+</ul>
+
+<hr>
+
+<h1 id="toc_9">The <code>if</code> statement</h1>
+
+<p>The <code>if</code> statement allows us to run code only if a certain test evaluates to <code>true</code></p>
+
+<pre><code class="language-ruby">if 5 &gt; 10
+  puts &quot;You&#39;ll never see this returned because 5 is not greater than 10&quot;
+end
+
+if 5 &lt; 10
+  puts &quot;But you&#39;ll definitely see this&quot;
+end</code></pre>
+
+<hr>
+
+<h1 id="toc_10">The <code>else</code> statement</h1>
+
+<p>The <code>else</code> statement runs only if the statement in the <code>if</code> statement is false</p>
+
+<pre><code class="language-javascript">if 5 &lt; 10
+  puts &quot;You&#39;ll never see this because 5 is not greater than 10&quot;
+else
+  puts &quot;You will see this though, since 5 &lt; 10 evaluates to false&quot;
+end</code></pre>
+
+<hr>
+
+<h1 id="toc_11">The <code>else if</code> statement</h1>
+
+<p>If you want to run another test before getting to <code>else</code>, you&#39;ll want to use <code>elsif</code></p>
+
+<pre><code class="language-ruby">if 5 &gt; 10
+  puts &quot;You&#39;ll never see this because 5 is not greater than 10&quot;
+elsif 5 == 5
+  puts &quot;Yes, 5 really is equal to 5, so this will be returned&quot;
+else
+  puts &quot;We won&#39;t get here because our else if evaluates to true&quot;
+end</code></pre>
+
+<hr>
+
+<h1 id="toc_12">Logic</h1>
+
+<p>Another logic example:</p>
+
+<pre><code class="language-ruby">a_number = 10
+
+if false
+  puts &quot;you&#39;ll never see this output&quot;
+elsif a_number == 30.1
+  puts &quot;Your number is equal to 30.1&quot;
+else
+  puts &quot;None of the other conditions are true, so we end up here&quot;
+end</code></pre>
+
+<hr>
+
+<h1 id="toc_13">Logic - AND (&amp;&amp;)</h1>
+
+<p>Use the &amp;&amp; operator (AND) if you&#39;d like both conditions to determine the final value:</p>
+
+<pre><code class="language-ruby">a = 5
+
+a == 5 &amp;&amp; a == 6
+
+&gt;false</code></pre>
+
+<hr>
+
+<h1 id="toc_14">Logic - OR (||)</h1>
+
+<p>Use the || operator (OR) to tack on another condition to test. If either condition is true, the entire statement returns true.</p>
+
+<pre><code class="language-ruby">a = 5
+
+a == 5 || a == 6
+
+&gt;true</code></pre>
+
+<hr>
+
+<h1 id="toc_15">Ruby syntax note</h1>
+
+<p>Ruby is different from many other programming languages in that the(, ), {, and } are either optional or completely unnecessary to write it</p>
+
+<p>example of &quot;block&quot; syntax in Ruby for logical statement</p>
+
+<pre><code class="language-ruby">if true
+  puts &quot;this is true&quot;
+end</code></pre>
+
+<p>example of &quot;block&quot; syntax in JavaScript for logical statement</p>
+
+<pre><code class="language-javascript">if(true){
+  console.log(&quot;This is true&quot;)
+}</code></pre>
+
+<hr>
+
+<h1 id="toc_16">Exercise</h1>
+
+<p>Add some examples of conditionals and logic to the &quot;cheat sheet&quot; file you created for the last exercise. Be sure to include comments explaining what each line of code is doing. For example:</p>
+
+<pre><code class="language-ruby"># This is an example of a conditional. Ruby will  
+
+# evaluate this code to true, which is of the 
+
+# boolean data type
+
+2 == 2</code></pre>
+
+<hr>
+
+<h1 id="toc_17">Loops</h1>
+
+<ul>
+<li><p>Are repetitive blocks of code where at least one variable inside the block typically changes each time the loop is run</p></li>
+<li><p>In Ruby, there are a few basic kinds:</p>
+
+<ul>
+<li><p><code>for</code></p></li>
+<li><p><code>while</code></p></li>
+<li><p><code>each</code></p></li>
+</ul></li>
+</ul>
+
+<hr>
+
+<h1 id="toc_18">for loop</h1>
+
+<pre><code class="language-ruby">for i in 0..4
+  puts &quot;currently on the number &quot; + i + &quot; iteration of this loop.&quot;
+end</code></pre>
+
+<p>For the variable <code>i</code>, representing the range of numbers from 0 to 4, loop over the range assigning i to whichever variable in the range we&#39;re currently &quot;on&quot;</p>
+
+<hr>
+
+<h1 id="toc_19">each loop</h1>
+
+<pre><code class="language-ruby">#setup an array of strings
+awesome_array = [&quot;This&quot;, &quot;is&quot;, &quot;awesome&quot;] 
+
+#for each item in the array
+awesome_array.each do |item|
+
+  #run this block of code - the current item is
+  #aliased to the variable name &quot;item&quot;
+  puts item
+end</code></pre>
+
+<hr>
+
+<h1 id="toc_20">while loop</h1>
+
+<pre><code class="language-ruby">some_number = 0 # set a counter up
+
+
+while some_number &lt; 5 # until this condition is no longer true
+  # execute the code inside this block
+
+  puts some_number
+
+  # add one to some_number each time to get closer to &gt;= 5
+  # which will end the loop
+  some_number = some_number + 1
+end</code></pre>
+
+<hr>
+
+<h1 id="toc_21">Functions</h1>
+
+<ul>
+<li><p>Functions are a way to alias a block of code with a name and call it later on</p></li>
+<li><p>They can take arguments, which are like variables used only inside the function</p></li>
+<li><p>Typically, they return a value</p></li>
+</ul>
+
+<hr>
+
+<h1 id="toc_22">Function syntax</h1>
+
+<pre><code class="language-ruby">def add_two(n)
+  n + 2
+end
+
+a = add_two(5)
+
+puts a
+# This would print out 7</code></pre>
+
+<hr>
+
+<h1 id="toc_23">Exercises</h1>
+
+<p>Create the following functions:</p>
+
+<ul>
+<li>Adds five to argument given</li>
+<li>Multiplies argument given by 15</li>
+<li>Performs a mathematical operation using four integer and/or float arguments</li>
+<li>Prints the argument given four times</li>
+<li>Prints an uppercase version of the argument given</li>
+</ul>
+
+
+</body>
+
+</html>

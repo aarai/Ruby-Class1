@@ -1,0 +1,188 @@
+<!DOCTYPE html><html>
+
+<head>
+<meta charset="utf-8">
+<title>rails</title>
+<style type="text/css">
+*{margin:0;padding:0;}
+body {
+	font:13.34px helvetica,arial,freesans,clean,sans-serif;
+	color:black;
+	line-height:1.4em;
+	background-color: #F8F8F8;
+	padding: 0.7em;
+}
+p {
+	margin:1em 0;
+	line-height:1.5em;
+}
+table {
+	font-size:inherit;
+	font:100%;
+	margin:1em;
+}
+table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
+select,option{padding:0 .25em;}
+optgroup{margin-top:.5em;}
+pre,code{font:12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
+pre {
+	margin:1em 0;
+	font-size:12px;
+	background-color:#eee;
+	border:1px solid #ddd;
+	padding:5px;
+	line-height:1.5em;
+	color:#444;
+	overflow:auto;
+	-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;border-radius:3px;
+}
+pre code {
+	padding:0;
+	font-size:12px;
+	background-color:#eee;
+	border:none;
+}
+code {
+	font-size:12px;
+	background-color:#f8f8ff;
+	color:#444;
+	padding:0 .2em;
+	border:1px solid #dedede;
+}
+img{border:0;max-width:100%;}
+abbr{border-bottom:none;}
+a{color:#4183c4;text-decoration:none;}
+a:hover{text-decoration:underline;}
+a code,a:link code,a:visited code{color:#4183c4;}
+h2,h3{margin:1em 0;}
+h1,h2,h3,h4,h5,h6{border:0;}
+h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em;}
+h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
+h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em;}
+h3{margin-top:1em;}
+hr{border:1px solid #ddd;}
+ul{margin:1em 0 1em 2em;}
+ol{margin:1em 0 1em 2em;}
+ul li,ol li{margin-top:.5em;margin-bottom:.5em;}
+ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}
+blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}
+dt{font-weight:bold;margin-left:1em;}
+dd{margin-left:2em;margin-bottom:1em;}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+</head>
+<body>
+<h1 id="toc_0">Intro to Rails</h1>
+
+<hr>
+
+<h3 id="toc_1">What is Rails?</h3>
+
+<ul>
+<li><p>Rails is a web application development framework written in the Ruby language. It is designed to make programming web applications easier by making assumptions about what every developer needs to get started. It allows you to write less code while accomplishing more than many other languages and frameworks. Experienced Rails developers also report that it makes web application development more fun.</p></li>
+<li><p>Rails is opinionated software. It makes the assumption that there is the &quot;best&quot; way to do things, and it&#39;s designed to encourage that way - and in some cases to discourage alternatives. If you learn &quot;The Rails Way&quot; you&#39;ll probably discover a tremendous increase in productivity. If you persist in bringing old habits from other languages to your Rails development, and trying to use patterns you learned elsewhere, you may have a less happy experience.</p></li>
+</ul>
+
+<h3 id="toc_2">The Rails philosophy includes two major guiding principles:</h3>
+
+<h3 id="toc_3">Don&#39;t Repeat Yourself:</h3>
+
+<ul>
+<li>DRY is a principle of software development which states that &quot;Every piece of knowledge must have a single, unambiguous, authoritative representation within a system.&quot; By not writing the same information over and over again, our code is more maintainable, more extensible, and less buggy.
+Convention Over Configuration: Rails has opinions about the best way to do many things in a web application, and defaults to this set of conventions, rather than require that you specify every minutiae through endless configuration files.</li>
+</ul>
+
+<h1 id="toc_4">MVC Archetcture</h1>
+
+<h3 id="toc_5">M</h3>
+
+<ul>
+<li>Model</li>
+</ul>
+
+<h3 id="toc_6">View</h3>
+
+<ul>
+<li>View</li>
+</ul>
+
+<h3 id="toc_7">C</h3>
+
+<ul>
+<li>Controller</li>
+</ul>
+
+<h3 id="toc_8">Understanding The Model-View-Controller Pattern</h3>
+
+<ul>
+<li><p>Rails is built around the model-view-controller pattern. It’s a simple concept: separate the data, logic, and display layers of your program. This lets you split functionality cleanly, just like having separate HTML, CSS and Javascript files prevents your code from mushing together. Here’s the MVC breakdown:</p></li>
+<li><p>Models are classes that talk to the databse. You find, create and save models, so you don’t (usually) have to write SQL. Rails has a class to handle the magic of saving to a database when a model is updated.</p></li>
+<li><p>Controllers take user input (like a URL) and decide what to do (show a page, order an item, post a comment). They may initially have business logic, like finding the right models or changing data. As your rails ninjitsu improves, constantly refactor and move business logic into the model (fat model, skinny controller). Ideally, controllers just take inputs, call model methods, and pass outputs to the view (including error messages).</p></li>
+<li><p>Views display the output, usually HTML. They use ERB and this part of Rails is like PHP – you use HTML templates with some Ruby variables thrown in. Rails also makes it easy to create views as XML (for web services/RSS feeds) or JSON (for AJAX calls).
+The MVC pattern is key to building a readable, maintainable and easily-updateable web app.</p></li>
+</ul>
+
+<hr>
+
+<h1 id="toc_9">Rails anatomy</h1>
+
+<p><img src="img/rails.png" alt="rails image">
+<img src="img/rails1.png" alt="rails image"></p>
+
+<hr>
+
+<h1 id="toc_10">Rails first example</h1>
+
+<p>The most basic object we can have looks like this:</p>
+
+<pre><code class="language-ruby">rails new testApp
+cd testApp
+rails server
+</code></pre>
+
+<p>Generate rails application and look at all that was created for us</p>
+
+<h1 id="toc_11">Rails generators example</h1>
+
+<pre><code>rails generate controller main index
+</code></pre>
+
+<p>navigate to the main route so that we can see the page we just created</p>
+
+<h3 id="toc_12">Error</h3>
+
+<p>Take a look at the error page and see why we are getting an error</p>
+
+<h1 id="toc_13">Share variables with a view</h1>
+
+<h1 id="toc_14">ERB</h1>
+
+
+</body>
+
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html><html>
+
+<head>
+<meta charset="utf-8">
+<title>rails-models</title>
+<style type="text/css">
+*{margin:0;padding:0;}
+body {
+	font:13.34px helvetica,arial,freesans,clean,sans-serif;
+	color:black;
+	line-height:1.4em;
+	background-color: #F8F8F8;
+	padding: 0.7em;
+}
+p {
+	margin:1em 0;
+	line-height:1.5em;
+}
+table {
+	font-size:inherit;
+	font:100%;
+	margin:1em;
+}
+table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
+select,option{padding:0 .25em;}
+optgroup{margin-top:.5em;}
+pre,code{font:12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
+pre {
+	margin:1em 0;
+	font-size:12px;
+	background-color:#eee;
+	border:1px solid #ddd;
+	padding:5px;
+	line-height:1.5em;
+	color:#444;
+	overflow:auto;
+	-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;border-radius:3px;
+}
+pre code {
+	padding:0;
+	font-size:12px;
+	background-color:#eee;
+	border:none;
+}
+code {
+	font-size:12px;
+	background-color:#f8f8ff;
+	color:#444;
+	padding:0 .2em;
+	border:1px solid #dedede;
+}
+img{border:0;max-width:100%;}
+abbr{border-bottom:none;}
+a{color:#4183c4;text-decoration:none;}
+a:hover{text-decoration:underline;}
+a code,a:link code,a:visited code{color:#4183c4;}
+h2,h3{margin:1em 0;}
+h1,h2,h3,h4,h5,h6{border:0;}
+h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em;}
+h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
+h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em;}
+h3{margin-top:1em;}
+hr{border:1px solid #ddd;}
+ul{margin:1em 0 1em 2em;}
+ol{margin:1em 0 1em 2em;}
+ul li,ol li{margin-top:.5em;margin-bottom:.5em;}
+ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}
+blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}
+dt{font-weight:bold;margin-left:1em;}
+dd{margin-left:2em;margin-bottom:1em;}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+</head>
+<body>
+<h1 id="toc_0">Rails: Models</h1>
+
+<hr>
+
+<h1 id="toc_1">What is a model?</h1>
+
+<ul>
+<li><p>A <strong>model</strong> is the Ruby-object representation of a table in your database</p></li>
+<li><p>For instance, for the <code>users</code>table: the <code>User</code> model represents this table in Ruby and allows you to interact with it</p></li>
+</ul>
+
+<hr>
+
+<h1 id="toc_2">Creating models in Rails</h1>
+
+<ul>
+<li>Rails makes the generation of models and their underlying tables quite simple.</li>
+</ul>
+
+<pre><code class="language-bash">$ rails generate model User fname:string lname:string email:string password:string</code></pre>
+
+<p>The above command will generate a database migration and the necessary model file for the users table and the User model</p>
+
+<hr>
+
+<h1 id="toc_3">Models - undo generation</h1>
+
+<ul>
+<li>To undo the generation of a model, just use:</li>
+</ul>
+
+<pre><code class="language-bash">$ rails destroy model User</code></pre>
+
+<hr>
+
+<h1 id="toc_4">What is a database migration?</h1>
+
+<ul>
+<li><p>A database migration is a file that serves as instructions for what changes to make to the database which is generated along with a model</p></li>
+<li><p>Modifying the file itself does not change the underlying database</p></li>
+<li><p>In order for the changes you have described to take effect, you need to run the database migration command</p></li>
+</ul>
+
+<hr>
+
+<h1 id="toc_5">Migrating the database</h1>
+
+<p>To migrate the database, you&#39;ll use a rake task in the db namespace called migrate</p>
+
+<pre><code class="language-bash">$ rake db:migrate</code></pre>
+
+<p>Once again, upon the generation of a model, a corresponding database migration as well as model file are created</p>
+
+<hr>
+
+<h1 id="toc_6">Rolling back database changes</h1>
+
+<ul>
+<li><p>If you&#39;d like to reverse the latest database migration, use 
+rake db:rollback</p></li>
+<li><p><strong>This is a destructive action. If you&#39;re rolling back the creation of a table for instance, you&#39;re dropping that table from the schema and all of the data inside of it.</strong></p></li>
+</ul>
+
+<hr>
+
+<h1 id="toc_7">Bringing it all together</h1>
+
+<p>Once a model is generated and the database is migrated, we can interact with our new database table/model in the Rails console:</p>
+
+<pre><code class="language-bash">$ rails console</code></pre>
+
+<p>The Rails console is simply an IRB (Interactive RuBy) console with all of the Rails project files included automatically</p>
+
+<hr>
+
+<h1 id="toc_8">Common ActiveRecord models</h1>
+
+<ul>
+<li><p>Here are some methods used quite often with ActiveRecord</p></li>
+<li><p>They can be called from the Rails console (<code>rails c</code>) or within your application code itself</p></li>
+<li><p>These are the same methods we&#39;ve been using as we&#39;ve built apps with ActiveRecord and Sinatra, so consider it a short refresher.</p></li>
+</ul>
+
+<hr>
+
+<h1 id="toc_9">Common ActiveRecord methods</h1>
+
+<h3 id="toc_10">Create</h3>
+
+<pre><code class="language-ruby">&gt;@user = User.new(fname: &quot;Brian&quot;, email:&quot;brian@nycda.com&quot;)</code></pre>
+
+<p>Creates an instance of User with the information given in the hash-like argument</p>
+
+<pre><code class="language-ruby">&gt;@user.save</code></pre>
+
+<p>saves that instance to the database</p>
+
+<hr>
+
+<h1 id="toc_11">Common ActiveRecord methods</h1>
+
+<h3 id="toc_12">Create</h3>
+
+<pre><code class="language-ruby">&gt;User.create(fname: &quot;Brian&quot;, email:&quot;brian@nycda.com&quot;)
+Creates an instance of User with the information given in the hash-like argument, then saves that instance to the database</code></pre>
+
+<hr>
+
+<h1 id="toc_13">Common ActiveRecord methods</h1>
+
+<h3 id="toc_14">Read</h3>
+
+<pre><code class="language-ruby">&gt;User.all</code></pre>
+
+<p>returns an array with all the records inside the users table</p>
+
+<pre><code class="language-ruby">&gt;User.find(5) </code></pre>
+
+<p>returns an instance of the User object containing data on the user with ID 5 inside of the database</p>
+
+<hr>
+
+<h1 id="toc_15">Common ActiveRecord methods</h1>
+
+<h3 id="toc_16">Read</h3>
+
+<pre><code class="language-ruby">&gt;User.first</code></pre>
+
+<p>returns an instance of the User object containing data on the user that is first in the users table</p>
+
+<pre><code class="language-ruby">&gt;User.last</code></pre>
+
+<p>returns an instance of the User object containing data on the user that is last in the users table</p>
+
+<hr>
+
+<h1 id="toc_17">Common ActiveRecord methods</h1>
+
+<h3 id="toc_18">Read</h3>
+
+<pre><code class="language-ruby">&gt;User.where(fname: &quot;Brian&quot;, email:&quot;brian@nycda.com&quot;)</code></pre>
+
+<p>returns an array full of instances of the User object that match any traits given in the hash-like argument. In this case, returns an array of any user with the fname Brian and the email brian@nycda.com</p>
+
+<hr>
+
+<h1 id="toc_19">Common ActiveRecord methods</h1>
+
+<h3 id="toc_20">Update</h3>
+
+<pre><code class="language-ruby">&gt;User.last.update(fname: &quot;Mr. Brian&quot;, email:&quot;brian@brianfountain.com&quot;)</code></pre>
+
+<p>Updates the last user in the users table with the information supplied in the hash-like argument</p>
+
+<hr>
+
+<h1 id="toc_21">Common ActiveRecord methods</h1>
+
+<h3 id="toc_22">Update</h3>
+
+<pre><code class="language-ruby">&gt;@user = User.last
+&gt;@user.fname = &quot;Lamar&quot;
+&gt;@user.save</code></pre>
+
+<p>1) Assign an instance of User that represents the last user in the database to the instance variable <code>@user</code>.
+2) Change the fname attribute on that instance.
+3) Save the changed instance back to the database.</p>
+
+<hr>
+
+<h1 id="toc_23">Common ActiveRecord methods</h1>
+
+<h3 id="toc_24">Destroy</h3>
+
+<pre><code class="language-ruby">&gt;User.last.destroy</code></pre>
+
+<p>Deletes the last user in the database.</p>
+
+<pre><code class="language-ruby">&gt;User.destroy_all</code></pre>
+
+<p>Deletes all users from the database. IRREVERSIBLE.</p>
+
+<hr>
+
+<h1 id="toc_25">Exercise</h1>
+
+<p>Create a new table called t<code>ransactions</code> along with a <code>Transaction</code> model</p>
+
+<p>Go through all of the basic CRUD (Create, Read, Update, Destroy) actions that we just learned using the Rails console</p>
+
+<hr>
+
+<h1 id="toc_26">ActiveRecord Table Associations</h1>
+
+<p>Consider two models: User and Post</p>
+
+<pre><code class="language-ruby">class User &lt; ActiveRecord::Base
+end
+
+class Post &lt; ActiveRecord::Base
+end</code></pre>
+
+<p>How would we go about associating them to make queries like:</p>
+
+<pre><code class="language-ruby">User.last.posts
+Post.first.user
+User.find(10).posts</code></pre>
+
+<hr>
+
+<h1 id="toc_27">ActiveRecord table associations</h1>
+
+<p>First of all, each Post needs to have a foreign key to refer back to a user</p>
+
+<p>Make sure that the schema for a Post has a user_id</p>
+
+<p>If this wasn&#39;t done initially, create a new migration and use the add_column method like so:</p>
+
+<pre><code class="language-ruby">add_column :posts, :user_id, :integer</code></pre>
+
+<hr>
+
+<h1 id="toc_28">ActiveRecord table associations</h1>
+
+<p>Once the foreign key is in place, make ActiveRecord aware of the association using association methods:</p>
+
+<pre><code class="language-ruby">class User &lt; ActiveRecord::Base
+
+  has_many :posts
+end
+
+class Post &lt; ActiveRecord::Base
+  
+  belongs_to :user
+end</code></pre>
+
+<p>Plural and singular are very important here, take note</p>
+
+<hr>
+
+<h1 id="toc_29">ActiveRecord table associations</h1>
+
+<ul>
+<li><p>One-to-one</p>
+
+<ul>
+<li>User model - <code>has_one :profile</code></li>
+<li>Profile model - <code>belongs_to :user</code></li>
+</ul></li>
+<li><p>One-to-many</p>
+
+<ul>
+<li>User model - <code>has_many :posts</code></li>
+<li>Post model -        <code>belongs_to :user</code></li>
+</ul></li>
+</ul>
+
+<hr>
+
+<h1 id="toc_30">ActiveRecord table associations</h1>
+
+<ul>
+<li><p>Many-to-many</p>
+
+<ul>
+<li><p>Use a 3rd table, a join table, to store information on this relationship</p></li>
+<li><p>For instance, if you have users and addresses, create a table called user<em>addresses with a user</em>id and address_id column</p></li>
+</ul></li>
+</ul>
+
+<hr>
+
+<h1 id="toc_31">Many-to-many: syntax</h1>
+
+<pre><code class="language-ruby">class User &lt; ActiveRecord::Base
+  has_many :user_addresses
+  has_many :addresses, through: :user_addresses
+end
+
+class Addresses &lt; ActiveRecord::Base
+  has_many :user_addresses
+  has_many :users, through: :user_addresses
+end
+
+class UserAddresses &lt; ActiveRecord::Base
+  belongs_to :user
+  belongs_to :address
+end</code></pre>
+
+<hr>
+
+<h3 id="toc_32">When all of your models are hooked up, you can query through them like so:</h3>
+
+<pre><code class="language-ruby">User.last.posts
+
+Post.first.user
+
+User.find(100).posts
+
+Address.last.users
+
+User.first.addresses</code></pre>
+
+<hr>
+
+<h1 id="toc_33">Exercise</h1>
+
+<ul>
+<li><p>Start a new Rails project</p></li>
+<li><p>Generate a User model and a Tweet model</p></li>
+<li><p>Associate the two models together so you can make queries like <code>User.last.tweets</code> and <code>Tweet.last.user</code></p></li>
+</ul>
+
+
+</body>
+
+</html>
